@@ -1,0 +1,5 @@
+version: "Apple Swift version 3.1 (swiftlang-802.0.53 clang-802.0.42)"
+options: "cf9d99e51e5f8bbda64f026a4aabe65f"
+build_time: [558370706, 883989000]
+inputs:
+  "/Users/Raphael/Documents/Projects/India Helper/DecimalPad/KeyboardViewController.swift": [558370704, 0]

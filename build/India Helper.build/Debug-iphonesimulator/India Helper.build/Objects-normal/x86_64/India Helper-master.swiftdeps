@@ -1,0 +1,6 @@
+version: "Apple Swift version 3.1 (swiftlang-802.0.53 clang-802.0.42)"
+options: "c969243e5d0c865f7219e258bf5cfe23"
+build_time: [558449045, 485715000]
+inputs:
+  "/Users/Raphael/Documents/Projects/India Helper/India Helper/ViewController.swift": [558448536, 0]
+  "/Users/Raphael/Documents/Projects/India Helper/India Helper/AppDelegate.swift": [551482157, 0]
