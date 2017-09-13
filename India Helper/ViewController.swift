@@ -119,7 +119,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     
                     DispatchQueue.main.async {
                         
+                        self.updateButton.isEnabled = true
                         self.lastUpdateLabel.isHidden = false
+                        
                         self.lakhCurrencyLabel.isHidden = false
                         self.croreCurrencyLabel.isHidden = false
                         self.lakhCroreCurrencyLabel.isHidden = false
@@ -155,7 +157,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         self.millionCurrencyLabel.text = "$"
                         self.billionCurrencyLabel.text = "$"
                         
-                        
+                        self.updateButton.isEnabled = true
                         self.lastUpdateLabel.isHidden = false
                         
                         self.lakhCurrencyLabel.isHidden = false
@@ -193,6 +195,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                             print("right custom value error")
                         }
                         
+                        self.updateButton.isEnabled = false
                         self.lastUpdateLabel.isHidden = true
                         self.infoButton.isHidden = true
                         
@@ -208,6 +211,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         self.rightCustomExchangeRate.isHidden = false
                         self.leftCustomExchangeRate.isHidden = false
                         self.rightCurrencyPicker.isUserInteractionEnabled = false
+                        
                         self.rightCurrencyPicker.alpha = 0.3
                     }
                 }
@@ -354,9 +358,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let keyboardY = keyboardRectangle.minY
             if(!leftCustomExchangeRate.isEditing && !rightCustomExchangeRate.isEditing) {
                 let scrollAmount = billionField.frame.maxY - keyboardY + 20
-                DispatchQueue.main.async {
-                    self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollAmount), animated: true)
+                if(scrollAmount > 0) {
+                    DispatchQueue.main.async {
+                        self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollAmount), animated: true)
+                    }
                 }
+                
             }
         }
     }
@@ -446,7 +453,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     }
                     DispatchQueue.main.async {
                         self.unlockUpdateButton(wasSuccessfull: true)
-                        self.rightCurrencyPicker.selectedRow(inComponent: self.currentlySelectedLeftRow)
+                        //self.leftCurrencyPicker.selectedRow(inComponent: self.currentlySelectedLeftRow)
                     }
                 }
                 else {

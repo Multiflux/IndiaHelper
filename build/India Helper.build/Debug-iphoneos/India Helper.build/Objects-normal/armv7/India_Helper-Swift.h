@@ -133,6 +133,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
+@import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -156,6 +157,7 @@ SWIFT_CLASS("_TtC12India_Helper11AppDelegate")
 @class UIPickerView;
 @class UILabel;
 @class UIButton;
+@class UIScrollView;
 @class UIEvent;
 @class NSBundle;
 @class NSCoder;
@@ -168,12 +170,13 @@ SWIFT_CLASS("_TtC12India_Helper14ViewController")
 @property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified millionField;
 @property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified lakhCroreField;
 @property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified billionField;
-@property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified leftCustomExchangeRate;
 @property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified rightCustomExchangeRate;
+@property (nonatomic, weak) IBOutlet UITextField * _Null_unspecified leftCustomExchangeRate;
 @property (nonatomic, weak) IBOutlet UIPickerView * _Null_unspecified leftCurrencyPicker;
 @property (nonatomic, weak) IBOutlet UIPickerView * _Null_unspecified rightCurrencyPicker;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified exchangeRateLabel;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified updateButton;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified infoButton;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified thousandCurrencyLabel;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified millionCurrencyLabel;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified billionCurrencyLabel;
@@ -181,6 +184,7 @@ SWIFT_CLASS("_TtC12India_Helper14ViewController")
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified croreCurrencyLabel;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified lakhCroreCurrencyLabel;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified lastUpdateLabel;
+@property (nonatomic, weak) IBOutlet UIScrollView * _Null_unspecified scrollView;
 @property (nonatomic, copy) NSString * _Nonnull lastInput;
 @property (nonatomic) double EURToINR;
 @property (nonatomic) double EURToLKR;
@@ -188,7 +192,6 @@ SWIFT_CLASS("_TtC12India_Helper14ViewController")
 @property (nonatomic) double USDToINR;
 @property (nonatomic) double USDToLKR;
 @property (nonatomic) double USDToBDT;
-@property (nonatomic) double custom;
 @property (nonatomic) double currentlySelectedExchangeRate;
 @property (nonatomic, copy) NSString * _Nonnull currentlySelectedLeftCurrency;
 @property (nonatomic) NSInteger currentlySelectedLeftRow;
@@ -202,6 +205,9 @@ SWIFT_CLASS("_TtC12India_Helper14ViewController")
 - (void)pickerView:(UIPickerView * _Nonnull)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 - (void)updateCurrentlySelectedTextfield;
 - (void)viewDidLoad;
+- (void)dismissKeyboard;
+- (void)keyboardWillShow:(NSNotification * _Nonnull)notification;
+- (void)scrollBack;
 - (void)didReceiveMemoryWarning;
 - (void)setCustomRateTextFieldsIsHiddenWithIsHidden:(BOOL)isHidden;
 - (double)getExchangeRateFromCurrenciesFrom:(NSString * _Nonnull)from to:(NSString * _Nonnull)to SWIFT_WARN_UNUSED_RESULT;
@@ -216,6 +222,8 @@ SWIFT_CLASS("_TtC12India_Helper14ViewController")
 - (IBAction)croreOnValueChanged:(UITextField * _Nonnull)sender forEvent:(UIEvent * _Nonnull)event;
 - (IBAction)billionOnValueChanged:(UITextField * _Nonnull)sender forEvent:(UIEvent * _Nonnull)event;
 - (IBAction)lakhCroreOnValueChanged:(UITextField * _Nonnull)sender forEvent:(UIEvent * _Nonnull)event;
+- (IBAction)leftCustomOnValueChanged:(UITextField * _Nonnull)sender forEvent:(UIEvent * _Nonnull)event;
+- (IBAction)rightCustomOnValueChanged:(UITextField * _Nonnull)sender forEvent:(UIEvent * _Nonnull)event;
 - (NSString * _Nonnull)convertToIndianWithValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nonnull)convertToMetricWithValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
 - (void)reset;
@@ -225,12 +233,18 @@ SWIFT_CLASS("_TtC12India_Helper14ViewController")
 - (void)fromCroreWithValue:(NSString * _Nonnull)value;
 - (void)fromBillionWithValue:(NSString * _Nonnull)value;
 - (void)fromLakhCroreWithValue:(NSString * _Nonnull)value;
-- (void)setLakhWithValue:(double)value;
-- (void)setCroreWithValue:(double)value;
 - (void)setThousandWithValue:(double)value;
+- (void)setThousandAsStringWithValue:(NSString * _Nonnull)value;
+- (void)setLakhWithValue:(double)value;
+- (void)setLakhAsStringWithValue:(NSString * _Nonnull)value;
 - (void)setMillionWithValue:(double)value;
+- (void)setMillionAsStringWithValue:(NSString * _Nonnull)value;
+- (void)setCroreWithValue:(double)value;
+- (void)setCroreAsStringWithValue:(NSString * _Nonnull)value;
 - (void)setBillionWithValue:(double)value;
+- (void)setBillionAsStringWithValue:(NSString * _Nonnull)value;
 - (void)setLakhCroreWithValue:(double)value;
+- (void)setLakhCroreAsStringWithValue:(NSString * _Nonnull)value;
 - (NSString * _Nonnull)stringNumberWithoutPunctuationWithValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
