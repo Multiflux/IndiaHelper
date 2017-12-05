@@ -20,6 +20,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //TODO Try other colors
     //TODO Make all elements dependent on size of screen
     //TODO make all changements on the elements asynchronous through dispatchQueue.main.async {}
+    //TODO make segmented control work with international and indian mode
+    
+    @IBOutlet weak var mode: UISegmentedControl!
     
     @IBOutlet weak var lakhField: UITextField!
 
@@ -63,6 +66,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var indian: Bool = false;
+    
     var lastInput: String = "Thousand"
     
     var EURToINR: Double = 0
@@ -84,217 +89,244 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
 //    class CurrencyPickerSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
-        let leftCurrencies = ["EUR", "USD", "Custom"]
-        let rightCurrencies = ["INR", "NPR", "LKR", "BDT"]
-    
-        func numberOfComponents(in pickerView: UIPickerView) -> Int {
-            return 1
-        }
-        
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            if(pickerView == leftCurrencyPicker) {
-                return leftCurrencies.count
-            } else {
-                return rightCurrencies.count
-            }
-        }
+    let leftCurrencies = ["EUR", "USD", "Custom"]
+    let rightCurrencies = ["INR", "NPR", "LKR", "BDT"]
 
-        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            if(pickerView == leftCurrencyPicker) {
-                return leftCurrencies[row]
-            } else {
-                return rightCurrencies[row]
-            }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if(pickerView == leftCurrencyPicker) {
+            return leftCurrencies.count
+        } else {
+            return rightCurrencies.count
         }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if(pickerView == leftCurrencyPicker) {
+            return leftCurrencies[row]
+        } else {
+            return rightCurrencies[row]
+        }
+    }
     
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    @IBAction func segmentControlOnTouchDown(_ sender: UISegmentedControl) {
+        print("worked!")
+        if (sender.selectedSegmentIndex == 0) //salty
         {
-            if(pickerView == leftCurrencyPicker) {
-                currentlySelectedLeftCurrency = leftCurrencies[row]
-                currentlySelectedLeftRow = row
-                if(row == 0)
-                {
-                    currentlySelectedExchangeRate = getExchangeRateFromCurrencies(from: "EUR", to: currentlySelectedRightCurrency)
-                    print("currentlySelectedExchangeRate:" + String(currentlySelectedExchangeRate))
+            indian = false;
+        }
+        else if (sender.selectedSegmentIndex == 1) //sweet
+        {
+            indian = true;
+        }
+        updateCurrentlySelectedTextfield()
+    }
+    
+    /*@IBAction func segmentControlOnTouchDown(_ sender: Any) {
+        
+        if (_firstSegmentSixthView.selectedSegmentIndex == 0) //salty
+        {
+            ViewController1 *vc1 = [[ViewController1 alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if (_firstSegmentSixthView.selectedSegmentIndex == 1) //sweet
+        {
+            ViewController2 *vc2 = [[ViewController2 alloc] init];
+            [self.navigationController pushViewController:vc2 animated:YES];
+        }
+    }*/
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if(pickerView == leftCurrencyPicker) {
+            currentlySelectedLeftCurrency = leftCurrencies[row]
+            currentlySelectedLeftRow = row
+            if(row == 0)
+            {
+                currentlySelectedExchangeRate = getExchangeRateFromCurrencies(from: "EUR", to: currentlySelectedRightCurrency)
+                print("currentlySelectedExchangeRate:" + String(currentlySelectedExchangeRate))
+                
+                DispatchQueue.main.async {
                     
-                    DispatchQueue.main.async {
-                        
-                        self.updateButton.isEnabled = true
-                        self.lastUpdateLabel.isHidden = false
-                        
-                        self.lakhCurrencyLabel.isHidden = false
-                        self.croreCurrencyLabel.isHidden = false
-                        self.lakhCroreCurrencyLabel.isHidden = false
-                        
-                        self.rightCustomExchangeRate.isHidden = true
-                        self.leftCustomExchangeRate.isHidden = true
-                        self.rightCurrencyPicker.isUserInteractionEnabled = true
-                        
-                        self.rightCurrencyPicker.alpha = 1
-                        
-                        self.thousandCurrencyLabel.text = "€"
-                        self.millionCurrencyLabel.text = "€"
-                        self.billionCurrencyLabel.text = "€"
-                        
-                        self.updateCurrentlySelectedTextfield()
-                        if(self.currentExchangeRates.isEmpty) {
-                            self.exchangeRateLabel.text = "..."
-                        } else {
-                            self.infoButton.isHidden = false
-                            self.exchangeRateLabel.text = "1€ = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
-                        }
+                    self.updateButton.isEnabled = true
+                    self.lastUpdateLabel.isHidden = false
+                    
+                    self.lakhCurrencyLabel.isHidden = false
+                    self.croreCurrencyLabel.isHidden = false
+                    self.lakhCroreCurrencyLabel.isHidden = false
+                    
+                    self.rightCustomExchangeRate.isHidden = true
+                    self.leftCustomExchangeRate.isHidden = true
+                    self.rightCurrencyPicker.isUserInteractionEnabled = true
+                    
+                    self.rightCurrencyPicker.alpha = 1
+                    
+                    self.thousandCurrencyLabel.text = "€"
+                    self.millionCurrencyLabel.text = "€"
+                    self.billionCurrencyLabel.text = "€"
+                    
+                    self.updateCurrentlySelectedTextfield()
+                    if(self.currentExchangeRates.isEmpty) {
+                        self.exchangeRateLabel.text = "..."
+                    } else {
+                        self.infoButton.isHidden = false
+                        self.exchangeRateLabel.text = "1€ = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
                     }
-                    
                 }
-                else if(row == 1)
-                {
-                    currentlySelectedExchangeRate = getExchangeRateFromCurrencies(from: "USD", to: currentlySelectedRightCurrency)
-                    print("currentlySelectedExchangeRate:" + String(currentlySelectedExchangeRate))
+                
+            }
+            else if(row == 1)
+            {
+                currentlySelectedExchangeRate = getExchangeRateFromCurrencies(from: "USD", to: currentlySelectedRightCurrency)
+                print("currentlySelectedExchangeRate:" + String(currentlySelectedExchangeRate))
+                
+                DispatchQueue.main.async {
                     
-                    DispatchQueue.main.async {
-                        
-                        self.thousandCurrencyLabel.text = "$"
-                        self.millionCurrencyLabel.text = "$"
-                        self.billionCurrencyLabel.text = "$"
-                        
-                        self.updateButton.isEnabled = true
-                        self.lastUpdateLabel.isHidden = false
-                        
-                        self.lakhCurrencyLabel.isHidden = false
-                        self.croreCurrencyLabel.isHidden = false
-                        self.lakhCroreCurrencyLabel.isHidden = false
-                        
-                        self.rightCustomExchangeRate.isHidden = true
-                        self.leftCustomExchangeRate.isHidden = true
-                        self.rightCurrencyPicker.isUserInteractionEnabled = true
-                        self.rightCurrencyPicker.alpha = 1
-                        
-                        if(self.currentExchangeRates.isEmpty) {
-                            self.exchangeRateLabel.text = "..."
-                        } else {
-                            self.infoButton.isHidden = true
-                            self.exchangeRateLabel.text = "1$ = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
-                        }
-                        
-                        self.updateCurrentlySelectedTextfield()
-                    }
+                    self.thousandCurrencyLabel.text = "$"
+                    self.millionCurrencyLabel.text = "$"
+                    self.billionCurrencyLabel.text = "$"
                     
+                    self.updateButton.isEnabled = true
+                    self.lastUpdateLabel.isHidden = false
                     
-                }
-                else if(row == 2)
-                {
-                    DispatchQueue.main.async {
-                        if let rightCustomValue = Double(self.leftCustomExchangeRate.text!) {
-                            if let leftCustomValue = Double(self.leftCustomExchangeRate.text!) {
-                                self.currentlySelectedExchangeRate = rightCustomValue/leftCustomValue
-                                self.updateCurrentlySelectedTextfield()
-                            } else {
-                                print("left custom value error")
-                            }
-                        } else {
-                            print("right custom value error")
-                        }
-                        
-                        self.updateButton.isEnabled = false
-                        self.lastUpdateLabel.isHidden = true
+                    self.lakhCurrencyLabel.isHidden = false
+                    self.croreCurrencyLabel.isHidden = false
+                    self.lakhCroreCurrencyLabel.isHidden = false
+                    
+                    self.rightCustomExchangeRate.isHidden = true
+                    self.leftCustomExchangeRate.isHidden = true
+                    self.rightCurrencyPicker.isUserInteractionEnabled = true
+                    self.rightCurrencyPicker.alpha = 1
+                    
+                    if(self.currentExchangeRates.isEmpty) {
+                        self.exchangeRateLabel.text = "..."
+                    } else {
                         self.infoButton.isHidden = true
-                        
-                        self.thousandCurrencyLabel.text = ""
-                        self.millionCurrencyLabel.text = ""
-                        self.billionCurrencyLabel.text = ""
-                        
-                        self.lakhCurrencyLabel.isHidden = true
-                        self.croreCurrencyLabel.isHidden = true
-                        self.lakhCroreCurrencyLabel.isHidden = true
-                        
-                        self.exchangeRateLabel.text = ":"
-                        self.rightCustomExchangeRate.isHidden = false
-                        self.leftCustomExchangeRate.isHidden = false
-                        self.rightCurrencyPicker.isUserInteractionEnabled = false
-                        
-                        self.rightCurrencyPicker.alpha = 0.3
+                        self.exchangeRateLabel.text = "1$ = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
+                    }
+                    
+                    self.updateCurrentlySelectedTextfield()
+                }
+                
+                
+            }
+            else if(row == 2)
+            {
+                DispatchQueue.main.async {
+                    if let rightCustomValue = Double(self.leftCustomExchangeRate.text!) {
+                        if let leftCustomValue = Double(self.leftCustomExchangeRate.text!) {
+                            self.currentlySelectedExchangeRate = rightCustomValue/leftCustomValue
+                            self.updateCurrentlySelectedTextfield()
+                        } else {
+                            print("left custom value error")
+                        }
+                    } else {
+                        print("right custom value error")
+                    }
+                    
+                    self.updateButton.isEnabled = false
+                    self.lastUpdateLabel.isHidden = true
+                    self.infoButton.isHidden = true
+                    
+                    self.thousandCurrencyLabel.text = ""
+                    self.millionCurrencyLabel.text = ""
+                    self.billionCurrencyLabel.text = ""
+                    
+                    self.lakhCurrencyLabel.isHidden = true
+                    self.croreCurrencyLabel.isHidden = true
+                    self.lakhCroreCurrencyLabel.isHidden = true
+                    
+                    self.exchangeRateLabel.text = ":"
+                    self.rightCustomExchangeRate.isHidden = false
+                    self.leftCustomExchangeRate.isHidden = false
+                    self.rightCurrencyPicker.isUserInteractionEnabled = false
+                    
+                    self.rightCurrencyPicker.alpha = 0.3
+                }
+            }
+        } else {
+            currentlySelectedRightCurrency = rightCurrencies[row]
+            if(row==0) {
+                DispatchQueue.main.async {
+                    self.currentlySelectedRightCurrency = "INR"
+                    
+                    self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
+                    
+                    self.lakhCurrencyLabel.text = "₹"
+                    self.croreCurrencyLabel.text = "₹"
+                    self.lakhCroreCurrencyLabel.text = "₹"
+                    
+                    self.updateCurrentlySelectedTextfield()
+                    
+                    if(self.currentExchangeRates.isEmpty) {
+                        self.exchangeRateLabel.text = "..."
+                    } else {
+                        self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
                     }
                 }
-            } else {
-                currentlySelectedRightCurrency = rightCurrencies[row]
-                if(row==0) {
-                    DispatchQueue.main.async {
-                        self.currentlySelectedRightCurrency = "INR"
-                        
-                        self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
-                        
-                        self.lakhCurrencyLabel.text = "₹"
-                        self.croreCurrencyLabel.text = "₹"
-                        self.lakhCroreCurrencyLabel.text = "₹"
-                        
-                        self.updateCurrentlySelectedTextfield()
-                        
-                        if(self.currentExchangeRates.isEmpty) {
-                            self.exchangeRateLabel.text = "..."
-                        } else {
-                            self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
-                        }
-                    }
 
-                } else if (row == 1) {
-                    DispatchQueue.main.async {
-                        self.currentlySelectedRightCurrency = "NPR"
-                        
-                        self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
-                        
-                        self.lakhCurrencyLabel.text = "रु"
-                        self.croreCurrencyLabel.text = "रु"
-                        self.lakhCroreCurrencyLabel.text = "रु"
-                        
-                        self.updateCurrentlySelectedTextfield()
-                        
-                        if(self.currentExchangeRates.isEmpty) {
-                            self.exchangeRateLabel.text = "..."
-                        } else {
-                            self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
-                        }
-                    }
-
+            } else if (row == 1) {
+                DispatchQueue.main.async {
+                    self.currentlySelectedRightCurrency = "NPR"
                     
-                } else if (row == 2) {
-                    DispatchQueue.main.async {
-                        self.currentlySelectedRightCurrency = "LKR"
-                        
-                        self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
-                        
-                        self.lakhCurrencyLabel.text = "රු"
-                        self.croreCurrencyLabel.text = "රු"
-                        self.lakhCroreCurrencyLabel.text = "රු"
-                        
-                        self.updateCurrentlySelectedTextfield()
-                        
-                        if(self.currentExchangeRates.isEmpty) {
-                            self.exchangeRateLabel.text = "..."
-                        } else {
-                            self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
-                        }
+                    self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
+                    
+                    self.lakhCurrencyLabel.text = "रु"
+                    self.croreCurrencyLabel.text = "रु"
+                    self.lakhCroreCurrencyLabel.text = "रु"
+                    
+                    self.updateCurrentlySelectedTextfield()
+                    
+                    if(self.currentExchangeRates.isEmpty) {
+                        self.exchangeRateLabel.text = "..."
+                    } else {
+                        self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
                     }
-                } else if (row == 3) {
-                    DispatchQueue.main.async {
-                        self.currentlySelectedRightCurrency = "BDT"
-                        
-                        self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
-                        
-                        self.lakhCurrencyLabel.text = "৳"
-                        self.croreCurrencyLabel.text = "৳"
-                        self.lakhCroreCurrencyLabel.text = "৳"
-                        
-                        self.updateCurrentlySelectedTextfield()
-                        
-                        if(self.currentExchangeRates.isEmpty) {
-                            self.exchangeRateLabel.text = "..."
-                        } else {
-                            self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
-                        }
+                }
+
+                
+            } else if (row == 2) {
+                DispatchQueue.main.async {
+                    self.currentlySelectedRightCurrency = "LKR"
+                    
+                    self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
+                    
+                    self.lakhCurrencyLabel.text = "රු"
+                    self.croreCurrencyLabel.text = "රු"
+                    self.lakhCroreCurrencyLabel.text = "රු"
+                    
+                    self.updateCurrentlySelectedTextfield()
+                    
+                    if(self.currentExchangeRates.isEmpty) {
+                        self.exchangeRateLabel.text = "..."
+                    } else {
+                        self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
+                    }
+                }
+            } else if (row == 3) {
+                DispatchQueue.main.async {
+                    self.currentlySelectedRightCurrency = "BDT"
+                    
+                    self.currentlySelectedExchangeRate = self.getExchangeRateFromCurrencies(from: self.currentlySelectedLeftCurrency, to: self.currentlySelectedRightCurrency)
+                    
+                    self.lakhCurrencyLabel.text = "৳"
+                    self.croreCurrencyLabel.text = "৳"
+                    self.lakhCroreCurrencyLabel.text = "৳"
+                    
+                    self.updateCurrentlySelectedTextfield()
+                    
+                    if(self.currentExchangeRates.isEmpty) {
+                        self.exchangeRateLabel.text = "..."
+                    } else {
+                        self.exchangeRateLabel.text = "1" + self.thousandCurrencyLabel.text! + " = " + String(format: "%.2f", self.currentlySelectedExchangeRate) + self.lakhCurrencyLabel.text!
                     }
                 }
             }
         }
+    }
  
     
     func updateCurrentlySelectedTextfield() {
@@ -363,7 +395,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollAmount), animated: true)
                     }
                 }
-                
             }
         }
     }
@@ -594,41 +625,71 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func convertToIndian(value: String) -> String {
-        print("pre conversion: " + value)
-        var indian = ""
-        if(value.contains(".")) {
-            let arr = value.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
-            let newValue = arr[0]
-            var i = newValue.characters.count - 1
-            var u = 1
-            while (i > -1) {
-                indian.insert(newValue[newValue.index(newValue.startIndex, offsetBy: i)], at: newValue.startIndex)
-                if(u % 2 == 0) && (u != newValue.characters.count) {
-                    indian.insert(",", at: value.startIndex)
+    func convertToDisplayedFormat(value: String) -> String {
+        var displayedFormat = ""
+        if(indian) {
+            print("pre conversion: " + value)
+            
+            if(value.contains(".")) {
+                let arr = value.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
+                let newValue = arr[0]
+                var i = newValue.characters.count - 1
+                var u = 1
+                while (i > -1) {
+                    displayedFormat.insert(newValue[newValue.index(newValue.startIndex, offsetBy: i)], at: newValue.startIndex)
+                    if(u % 2 == 0) && (u != newValue.characters.count) {
+                        displayedFormat.insert(",", at: value.startIndex)
+                    }
+                    u += 1
+                    i -= 1
                 }
-                u += 1
-                i -= 1
+                displayedFormat.append("." + arr[1])
+            } else {
+                var i = value.replacingOccurrences(of: ",", with: "").characters.count - 1
+                var u = 1
+                while (i > -1) {
+                    displayedFormat.insert(value[value.index(value.startIndex, offsetBy: i)], at: value.startIndex)
+                    if(u % 2 == 0) && (u != value.characters.count) {
+                        displayedFormat.insert(",", at: value.startIndex)
+                    }
+                    u += 1
+                    i -= 1
+                }
             }
-            indian.append("." + arr[1])
+            print("indian: " + displayedFormat)
         } else {
-            var i = value.replacingOccurrences(of: ",", with: "").characters.count - 1
-            var u = 1
-            while (i > -1) {
-                indian.insert(value[value.index(value.startIndex, offsetBy: i)], at: value.startIndex)
-                if(u % 2 == 0) && (u != value.characters.count) {
-                    indian.insert(",", at: value.startIndex)
+            print("pre conversion: " + value)
+            if(value.contains(".")) {
+                let arr = value.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
+                let newValue = arr[0]
+                var i = newValue.characters.count - 1
+                var u = 1
+                while (i > -1) {
+                    displayedFormat.insert(newValue[newValue.index(newValue.startIndex, offsetBy: i)], at: newValue.startIndex)
+                    if(u % 3 == 0) && (u != newValue.characters.count) {
+                        displayedFormat.insert(",", at: value.startIndex)
+                    }
+                    u += 1
+                    i -= 1
                 }
-                u += 1
-                i -= 1
+                displayedFormat.append("." + arr[1])
+            } else {
+                var i = value.replacingOccurrences(of: ",", with: "").characters.count - 1
+                var u = 1
+                while (i > -1) {
+                    displayedFormat.insert(value[value.index(value.startIndex, offsetBy: i)], at: value.startIndex)
+                    if(u % 3 == 0) && (u != value.characters.count) {
+                        displayedFormat.insert(",", at: value.startIndex)
+                    }
+                    u += 1
+                    i -= 1
+                }
             }
         }
-        print("indian: " + indian)
-        return indian
-        //return value
+        return displayedFormat
     }
     
-    func convertToMetric(value: String) -> String {
+  /*  func convertToMetric(value: String) -> String {
         print("pre conversion: " + value)
         var metric = ""
         if(value.contains(".")) {
@@ -660,7 +721,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("metric: " + metric)
         return metric
         //return value
-    }
+    } */
     
     
     
@@ -762,10 +823,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             
             setCroreAsString(value: stringNumberWithoutPunctuation(value: value))
             
-            let billion: Double = (number / currentlySelectedExchangeRate) * 10000000
+            let billion: Double = (number / currentlySelectedExchangeRate) / 100
             setBillion(value: billion)
             
-            let lakhCrore: Double = (number) * 10000000
+            let lakhCrore: Double = (number) / 100000
             setLakhCrore(value: lakhCrore)
         }
     }
@@ -823,9 +884,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("setting thousand")
         DispatchQueue.main.async {
             if(floor(value) == value) {
-                self.thousandField.text = self.convertToMetric(value: String(Int(value)))
+                self.thousandField.text = self.convertToDisplayedFormat(value: String(Int(value)))
             } else {
-                self.thousandField.text = self.convertToMetric(value: String(format: "%.2f", value))
+                self.thousandField.text = self.convertToDisplayedFormat(value: String(format: "%.2f", value))
             }
         }
     }
@@ -833,7 +894,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func setThousandAsString(value: String) {
         print("setting thousand as string")
         DispatchQueue.main.async {
-            self.thousandField.text = self.convertToMetric(value: value)
+            self.thousandField.text = self.convertToDisplayedFormat(value: value)
         }
     }
     
@@ -841,9 +902,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("setting lakh")
         DispatchQueue.main.async {
             if(floor(value) == value) {
-                self.lakhField.text = self.convertToIndian(value: String(Int(value)))
+                self.lakhField.text = self.convertToDisplayedFormat(value: String(Int(value)))
             } else {
-                self.lakhField.text = self.convertToIndian(value: String(format: "%.2f", value))
+                self.lakhField.text = self.convertToDisplayedFormat(value: String(format: "%.2f", value))
             }
         }
     }
@@ -851,7 +912,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func setLakhAsString(value: String) {
         print("setting lakh as string")
         DispatchQueue.main.async {
-            self.lakhField.text = self.convertToIndian(value: value)
+            self.lakhField.text = self.convertToDisplayedFormat(value: value)
         }
     }
     
@@ -859,9 +920,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("setting million")
         DispatchQueue.main.async {
             if(floor(value) == value) {
-                self.millionField.text = self.convertToMetric(value: String(Int(value)))
+                self.millionField.text = self.convertToDisplayedFormat(value: String(Int(value)))
             } else {
-                self.millionField.text = self.convertToMetric(value: String(format: "%.2f", value))
+                self.millionField.text = self.convertToDisplayedFormat(value: String(format: "%.2f", value))
             }
         }
     }
@@ -869,7 +930,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func setMillionAsString(value: String) {
         print("setting thousand as string")
         DispatchQueue.main.async {
-            self.millionField.text = self.convertToMetric(value: value)
+            self.millionField.text = self.convertToDisplayedFormat(value: value)
         }
     }
     
@@ -877,9 +938,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("setting crore")
         DispatchQueue.main.async {
             if(floor(value) == value) {
-                self.croreField.text = self.convertToIndian(value: String(Int(value)))
+                self.croreField.text = self.convertToDisplayedFormat(value: String(Int(value)))
             } else {
-                self.croreField.text = self.convertToIndian(value: String(format: "%.2f", value))
+                self.croreField.text = self.convertToDisplayedFormat(value: String(format: "%.2f", value))
             }
         }
     }
@@ -887,7 +948,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func setCroreAsString(value: String) {
         print("setting lakh as string")
         DispatchQueue.main.async {
-            self.croreField.text = self.convertToIndian(value: value)
+            self.croreField.text = self.convertToDisplayedFormat(value: value)
         }
     }
     
@@ -896,9 +957,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("setting billion")
         DispatchQueue.main.async {
             if(floor(value) == value) {
-                self.billionField.text = self.convertToMetric(value: String(Int(value)))
+                self.billionField.text = self.convertToDisplayedFormat(value: String(Int(value)))
             } else {
-                self.billionField.text = self.convertToMetric(value: String(format: "%.2f", value))
+                self.billionField.text = self.convertToDisplayedFormat(value: String(format: "%.2f", value))
             }
         }
     }
@@ -906,7 +967,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func setBillionAsString(value: String) {
         print("setting thousand as string")
         DispatchQueue.main.async {
-            self.billionField.text = self.convertToMetric(value: value)
+            self.billionField.text = self.convertToDisplayedFormat(value: value)
         }
     }
     
@@ -914,9 +975,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("setting lakhCrore")
         DispatchQueue.main.async {
             if(floor(value) == value) {
-                self.lakhCroreField.text = self.convertToIndian(value: String(Int(value)))
+                self.lakhCroreField.text = self.convertToDisplayedFormat(value: String(Int(value)))
             } else {
-                self.lakhCroreField.text = self.convertToIndian(value: String(format: "%.2f", value))
+                self.lakhCroreField.text = self.convertToDisplayedFormat(value: String(format: "%.2f", value))
             }
         }
     }
@@ -924,7 +985,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func setLakhCroreAsString(value: String) {
         print("setting lakh as string")
         DispatchQueue.main.async {
-            self.lakhCroreField.text = self.convertToIndian(value: value)
+            self.lakhCroreField.text = self.convertToDisplayedFormat(value: value)
         }
     }
     
