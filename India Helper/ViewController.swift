@@ -377,13 +377,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
         scrollBack()
     }
     
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
         {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -633,24 +633,40 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if(value.contains(".")) {
                 let arr = value.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
                 let newValue = arr[0]
-                var i = newValue.characters.count - 1
+                var i = newValue.count - 1
                 var u = 1
                 while (i > -1) {
                     displayedFormat.insert(newValue[newValue.index(newValue.startIndex, offsetBy: i)], at: newValue.startIndex)
-                    if(u % 2 == 0) && (u != newValue.characters.count) {
-                        displayedFormat.insert(",", at: value.startIndex)
+                    if(u < 4) {
+                        if(u == 3 && (u != newValue.count)) {
+                            displayedFormat.insert(",", at: value.startIndex)
+                            //u = 0
+                        }
+                    }
+                    else {
+                        if(u % 2 == 1) && (u != newValue.count) {
+                            displayedFormat.insert(",", at: value.startIndex)
+                        }
                     }
                     u += 1
                     i -= 1
                 }
                 displayedFormat.append("." + arr[1])
             } else {
-                var i = value.replacingOccurrences(of: ",", with: "").characters.count - 1
+                var i = value.replacingOccurrences(of: ",", with: "").count - 1
                 var u = 1
                 while (i > -1) {
                     displayedFormat.insert(value[value.index(value.startIndex, offsetBy: i)], at: value.startIndex)
-                    if(u % 2 == 0) && (u != value.characters.count) {
-                        displayedFormat.insert(",", at: value.startIndex)
+                    if(u < 4) {
+                        if(u == 3 && (u != value.count)) {
+                            displayedFormat.insert(",", at: value.startIndex)
+                            //u = 0
+                        }
+                    }
+                    else {
+                        if(u % 2 == 1) && (u != value.count) {
+                            displayedFormat.insert(",", at: value.startIndex)
+                        }
                     }
                     u += 1
                     i -= 1
@@ -662,11 +678,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if(value.contains(".")) {
                 let arr = value.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
                 let newValue = arr[0]
-                var i = newValue.characters.count - 1
+                var i = newValue.count - 1
                 var u = 1
                 while (i > -1) {
                     displayedFormat.insert(newValue[newValue.index(newValue.startIndex, offsetBy: i)], at: newValue.startIndex)
-                    if(u % 3 == 0) && (u != newValue.characters.count) {
+                    if(u % 3 == 0) && (u != newValue.count) {
                         displayedFormat.insert(",", at: value.startIndex)
                     }
                     u += 1
@@ -674,11 +690,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
                 displayedFormat.append("." + arr[1])
             } else {
-                var i = value.replacingOccurrences(of: ",", with: "").characters.count - 1
+                var i = value.replacingOccurrences(of: ",", with: "").count - 1
                 var u = 1
                 while (i > -1) {
                     displayedFormat.insert(value[value.index(value.startIndex, offsetBy: i)], at: value.startIndex)
-                    if(u % 3 == 0) && (u != value.characters.count) {
+                    if(u % 3 == 0) && (u != value.count) {
                         displayedFormat.insert(",", at: value.startIndex)
                     }
                     u += 1
