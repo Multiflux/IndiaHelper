@@ -6,36 +6,15 @@ provides-nominal:
 provides-member:
 - ["12India_Helper14ViewControllerC", ""]
 provides-dynamic-lookup:
-- "EURToBDT"
-- "EURToINR"
-- "EURToLKR"
-- "USDToBDT"
-- "USDToINR"
-- "USDToLKR"
 - "billionCurrencyLabel"
 - "billionField"
 - "billionOnValueChanged"
-- "convertToDisplayedFormat"
 - "croreCurrencyLabel"
 - "croreField"
 - "croreOnValueChanged"
-- "currentExchangeRates"
-- "currentlySelectedExchangeRate"
-- "currentlySelectedLeftCurrency"
-- "currentlySelectedLeftRow"
-- "currentlySelectedRightCurrency"
 - "didReceiveMemoryWarning"
 - "dismissKeyboard"
 - "exchangeRateLabel"
-- "fromBillion"
-- "fromCrore"
-- "fromLakh"
-- "fromLakhCrore"
-- "fromMillion"
-- "fromThousand"
-- "getExchangeRateFromCurrencies"
-- "getExchangeRatesFromAPI"
-- "indian"
 - "infoButton"
 - "infoButtonOnClicked"
 - "keyboardWillShow"
@@ -45,48 +24,27 @@ provides-dynamic-lookup:
 - "lakhCurrencyLabel"
 - "lakhField"
 - "lakhOnValueChanged"
-- "lastInput"
 - "lastUpdateLabel"
-- "leftCurrencies"
 - "leftCurrencyPicker"
 - "leftCustomExchangeRate"
 - "leftCustomOnValueChanged"
-- "lockUpdateButton"
 - "millionCurrencyLabel"
 - "millionField"
 - "millionOnValueChanged"
 - "mode"
 - "numberOfComponents"
 - "pickerView"
-- "reset"
-- "rightCurrencies"
 - "rightCurrencyPicker"
 - "rightCustomExchangeRate"
 - "rightCustomOnValueChanged"
-- "scrollBack"
 - "scrollView"
 - "segmentControlOnTouchDown"
-- "setBillion"
-- "setBillionAsString"
-- "setCrore"
-- "setCroreAsString"
-- "setCustomRateTextFieldsIsHidden"
-- "setLakh"
-- "setLakhAsString"
-- "setLakhCrore"
-- "setLakhCroreAsString"
-- "setMillion"
-- "setMillionAsString"
-- "setThousand"
-- "setThousandAsString"
-- "stringNumberWithoutPunctuation"
 - "thousandCurrencyLabel"
 - "thousandField"
 - "thousandOnValueChanged"
 - "unlockUpdateButton"
 - "updateButton"
 - "updateButtonOnClicked"
-- "updateCurrentlySelectedTextfield"
 - "viewDidLoad"
 depends-top-level:
 - !private "!"
@@ -145,7 +103,6 @@ depends-member:
 - !private ["Sa", "count"]
 - !private ["Sa", "subscript"]
 - !private ["s23BidirectionalCollectionP", "append"]
-- !private ["s23BidirectionalCollectionP", "characters"]
 - !private ["s23BidirectionalCollectionP", "components"]
 - !private ["s23BidirectionalCollectionP", "contains"]
 - !private ["s23BidirectionalCollectionP", "count"]
@@ -206,7 +163,6 @@ depends-member:
 - !private ["s7CVarArgP", "billionCurrencyLabel"]
 - !private ["s7CVarArgP", "billionField"]
 - !private ["s7CVarArgP", "cgRectValue"]
-- !private ["s7CVarArgP", "characters"]
 - !private ["s7CVarArgP", "components"]
 - !private ["s7CVarArgP", "contains"]
 - !private ["s7CVarArgP", "convertToDisplayedFormat"]
@@ -306,9 +262,7 @@ depends-member:
 - !private ["s7CVarArgP", "viewDidLoad"]
 - ["s7CVarArgP", ""]
 - !private ["s9CharacterV", "init"]
-- !private ["SS13CharacterViewV", "count"]
 - !private ["s10CollectionP", "append"]
-- !private ["s10CollectionP", "characters"]
 - !private ["s10CollectionP", "components"]
 - !private ["s10CollectionP", "contains"]
 - !private ["s10CollectionP", "count"]
@@ -320,9 +274,9 @@ depends-member:
 - !private ["s10CollectionP", "startIndex"]
 - !private ["s10CollectionP", "subscript"]
 - !private ["s10ComparableP", "append"]
-- !private ["s10ComparableP", "characters"]
 - !private ["s10ComparableP", "components"]
 - !private ["s10ComparableP", "contains"]
+- !private ["s10ComparableP", "count"]
 - !private ["s10ComparableP", "index"]
 - ["s10ComparableP", "init"]
 - !private ["s10ComparableP", "insert"]
@@ -360,7 +314,6 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "billionCurrencyLabel"]
 - !private ["s28CustomDebugStringConvertibleP", "billionField"]
 - !private ["s28CustomDebugStringConvertibleP", "cgRectValue"]
-- !private ["s28CustomDebugStringConvertibleP", "characters"]
 - !private ["s28CustomDebugStringConvertibleP", "components"]
 - !private ["s28CustomDebugStringConvertibleP", "contains"]
 - !private ["s28CustomDebugStringConvertibleP", "convertToDisplayedFormat"]
@@ -465,9 +418,9 @@ depends-member:
 - !private ["s29CustomPlaygroundQuickLookableP", "_getBuiltinLogicValue"]
 - !private ["s29CustomPlaygroundQuickLookableP", "absoluteString"]
 - !private ["s29CustomPlaygroundQuickLookableP", "append"]
-- !private ["s29CustomPlaygroundQuickLookableP", "characters"]
 - !private ["s29CustomPlaygroundQuickLookableP", "components"]
 - !private ["s29CustomPlaygroundQuickLookableP", "contains"]
+- !private ["s29CustomPlaygroundQuickLookableP", "count"]
 - !private ["s29CustomPlaygroundQuickLookableP", "index"]
 - ["s29CustomPlaygroundQuickLookableP", "init"]
 - !private ["s29CustomPlaygroundQuickLookableP", "insert"]
@@ -479,7 +432,6 @@ depends-member:
 - !private ["s29CustomPlaygroundQuickLookableP", "subscript"]
 - !private ["s17CustomReflectableP", "_getBuiltinLogicValue"]
 - !private ["s17CustomReflectableP", "append"]
-- !private ["s17CustomReflectableP", "characters"]
 - !private ["s17CustomReflectableP", "components"]
 - !private ["s17CustomReflectableP", "contains"]
 - !private ["s17CustomReflectableP", "count"]
@@ -524,7 +476,6 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "billionCurrencyLabel"]
 - !private ["s23CustomStringConvertibleP", "billionField"]
 - !private ["s23CustomStringConvertibleP", "cgRectValue"]
-- !private ["s23CustomStringConvertibleP", "characters"]
 - !private ["s23CustomStringConvertibleP", "components"]
 - !private ["s23CustomStringConvertibleP", "contains"]
 - !private ["s23CustomStringConvertibleP", "convertToDisplayedFormat"]
@@ -631,7 +582,6 @@ depends-member:
 - !private ["s9DecodableP", "_getBuiltinLogicValue"]
 - !private ["s9DecodableP", "absoluteString"]
 - !private ["s9DecodableP", "append"]
-- !private ["s9DecodableP", "characters"]
 - !private ["s9DecodableP", "components"]
 - !private ["s9DecodableP", "contains"]
 - !private ["s9DecodableP", "count"]
@@ -654,7 +604,6 @@ depends-member:
 - !private ["s9EncodableP", "_getBuiltinLogicValue"]
 - !private ["s9EncodableP", "absoluteString"]
 - !private ["s9EncodableP", "append"]
-- !private ["s9EncodableP", "characters"]
 - !private ["s9EncodableP", "components"]
 - !private ["s9EncodableP", "contains"]
 - !private ["s9EncodableP", "count"]
@@ -700,10 +649,10 @@ depends-member:
 - !private ["s9EquatableP", "billionCurrencyLabel"]
 - !private ["s9EquatableP", "billionField"]
 - !private ["s9EquatableP", "cgRectValue"]
-- !private ["s9EquatableP", "characters"]
 - !private ["s9EquatableP", "components"]
 - !private ["s9EquatableP", "contains"]
 - !private ["s9EquatableP", "convertToDisplayedFormat"]
+- !private ["s9EquatableP", "count"]
 - !private ["s9EquatableP", "croreCurrencyLabel"]
 - !private ["s9EquatableP", "croreField"]
 - !private ["s9EquatableP", "currentExchangeRates"]
@@ -807,9 +756,9 @@ depends-member:
 - !private ["s30ExpressibleByDictionaryLiteralP", "isEmpty"]
 - !private ["s30ExpressibleByDictionaryLiteralP", "subscript"]
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "append"]
-- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "characters"]
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "components"]
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "contains"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "count"]
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "index"]
 - ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "insert"]
@@ -820,9 +769,9 @@ depends-member:
 - !private ["s25ExpressibleByFloatLiteralP", "init"]
 - !private ["s27ExpressibleByIntegerLiteralP", "init"]
 - !private ["s26ExpressibleByStringLiteralP", "append"]
-- !private ["s26ExpressibleByStringLiteralP", "characters"]
 - !private ["s26ExpressibleByStringLiteralP", "components"]
 - !private ["s26ExpressibleByStringLiteralP", "contains"]
+- !private ["s26ExpressibleByStringLiteralP", "count"]
 - !private ["s26ExpressibleByStringLiteralP", "index"]
 - ["s26ExpressibleByStringLiteralP", "init"]
 - !private ["s26ExpressibleByStringLiteralP", "insert"]
@@ -831,9 +780,9 @@ depends-member:
 - !private ["s26ExpressibleByStringLiteralP", "startIndex"]
 - !private ["s26ExpressibleByStringLiteralP", "subscript"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "append"]
-- !private ["s33ExpressibleByUnicodeScalarLiteralP", "characters"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "components"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "contains"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "count"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "index"]
 - ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "insert"]
@@ -879,10 +828,10 @@ depends-member:
 - !private ["s8HashableP", "billionCurrencyLabel"]
 - !private ["s8HashableP", "billionField"]
 - !private ["s8HashableP", "cgRectValue"]
-- !private ["s8HashableP", "characters"]
 - !private ["s8HashableP", "components"]
 - !private ["s8HashableP", "contains"]
 - !private ["s8HashableP", "convertToDisplayedFormat"]
+- !private ["s8HashableP", "count"]
 - !private ["s8HashableP", "croreCurrencyLabel"]
 - !private ["s8HashableP", "croreField"]
 - !private ["s8HashableP", "currentExchangeRates"]
@@ -982,9 +931,9 @@ depends-member:
 - !private ["So17JSONSerializationC", "jsonObject"]
 - !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
 - !private ["s25LosslessStringConvertibleP", "append"]
-- !private ["s25LosslessStringConvertibleP", "characters"]
 - !private ["s25LosslessStringConvertibleP", "components"]
 - !private ["s25LosslessStringConvertibleP", "contains"]
+- !private ["s25LosslessStringConvertibleP", "count"]
 - !private ["s25LosslessStringConvertibleP", "index"]
 - ["s25LosslessStringConvertibleP", "init"]
 - !private ["s25LosslessStringConvertibleP", "insert"]
@@ -993,9 +942,9 @@ depends-member:
 - !private ["s25LosslessStringConvertibleP", "startIndex"]
 - !private ["s25LosslessStringConvertibleP", "subscript"]
 - !private ["s10MirrorPathP", "append"]
-- !private ["s10MirrorPathP", "characters"]
 - !private ["s10MirrorPathP", "components"]
 - !private ["s10MirrorPathP", "contains"]
+- !private ["s10MirrorPathP", "count"]
 - !private ["s10MirrorPathP", "index"]
 - ["s10MirrorPathP", "init"]
 - !private ["s10MirrorPathP", "insert"]
@@ -1032,10 +981,10 @@ depends-member:
 - !private ["So8NSCodingP", "billionCurrencyLabel"]
 - !private ["So8NSCodingP", "billionField"]
 - !private ["So8NSCodingP", "cgRectValue"]
-- !private ["So8NSCodingP", "characters"]
 - !private ["So8NSCodingP", "components"]
 - !private ["So8NSCodingP", "contains"]
 - !private ["So8NSCodingP", "convertToDisplayedFormat"]
+- !private ["So8NSCodingP", "count"]
 - !private ["So8NSCodingP", "croreCurrencyLabel"]
 - !private ["So8NSCodingP", "croreField"]
 - !private ["So8NSCodingP", "currentExchangeRates"]
@@ -1127,9 +1076,9 @@ depends-member:
 - !private ["So9NSCopyingP", "Name"]
 - !private ["So9NSCopyingP", "append"]
 - !private ["So9NSCopyingP", "cgRectValue"]
-- !private ["So9NSCopyingP", "characters"]
 - !private ["So9NSCopyingP", "components"]
 - !private ["So9NSCopyingP", "contains"]
+- !private ["So9NSCopyingP", "count"]
 - !private ["So9NSCopyingP", "dateFormat"]
 - !private ["So9NSCopyingP", "index"]
 - ["So9NSCopyingP", "init"]
@@ -1231,9 +1180,9 @@ depends-member:
 - !private ["So26NSExtensionRequestHandlingP", "viewDidLoad"]
 - ["So26NSExtensionRequestHandlingP", ""]
 - !private ["So21NSItemProviderReadingP", "append"]
-- !private ["So21NSItemProviderReadingP", "characters"]
 - !private ["So21NSItemProviderReadingP", "components"]
 - !private ["So21NSItemProviderReadingP", "contains"]
+- !private ["So21NSItemProviderReadingP", "count"]
 - !private ["So21NSItemProviderReadingP", "index"]
 - ["So21NSItemProviderReadingP", "init"]
 - !private ["So21NSItemProviderReadingP", "insert"]
@@ -1242,9 +1191,9 @@ depends-member:
 - !private ["So21NSItemProviderReadingP", "startIndex"]
 - !private ["So21NSItemProviderReadingP", "subscript"]
 - !private ["So21NSItemProviderWritingP", "append"]
-- !private ["So21NSItemProviderWritingP", "characters"]
 - !private ["So21NSItemProviderWritingP", "components"]
 - !private ["So21NSItemProviderWritingP", "contains"]
+- !private ["So21NSItemProviderWritingP", "count"]
 - !private ["So21NSItemProviderWritingP", "index"]
 - ["So21NSItemProviderWritingP", "init"]
 - !private ["So21NSItemProviderWritingP", "insert"]
@@ -1253,9 +1202,9 @@ depends-member:
 - !private ["So21NSItemProviderWritingP", "startIndex"]
 - !private ["So21NSItemProviderWritingP", "subscript"]
 - !private ["So16NSMutableCopyingP", "append"]
-- !private ["So16NSMutableCopyingP", "characters"]
 - !private ["So16NSMutableCopyingP", "components"]
 - !private ["So16NSMutableCopyingP", "contains"]
+- !private ["So16NSMutableCopyingP", "count"]
 - !private ["So16NSMutableCopyingP", "index"]
 - ["So16NSMutableCopyingP", "init"]
 - !private ["So16NSMutableCopyingP", "insert"]
@@ -1308,10 +1257,10 @@ depends-member:
 - ["So8NSObjectC", "billionField"]
 - ["So8NSObjectC", "billionOnValueChanged"]
 - !private ["So8NSObjectC", "cgRectValue"]
-- !private ["So8NSObjectC", "characters"]
 - !private ["So8NSObjectC", "components"]
 - !private ["So8NSObjectC", "contains"]
 - ["So8NSObjectC", "convertToDisplayedFormat"]
+- !private ["So8NSObjectC", "count"]
 - ["So8NSObjectC", "croreCurrencyLabel"]
 - ["So8NSObjectC", "croreField"]
 - ["So8NSObjectC", "croreOnValueChanged"]
@@ -1446,10 +1395,10 @@ depends-member:
 - !private ["So16NSObjectProtocolP", "billionCurrencyLabel"]
 - !private ["So16NSObjectProtocolP", "billionField"]
 - !private ["So16NSObjectProtocolP", "cgRectValue"]
-- !private ["So16NSObjectProtocolP", "characters"]
 - !private ["So16NSObjectProtocolP", "components"]
 - !private ["So16NSObjectProtocolP", "contains"]
 - !private ["So16NSObjectProtocolP", "convertToDisplayedFormat"]
+- !private ["So16NSObjectProtocolP", "count"]
 - !private ["So16NSObjectProtocolP", "croreCurrencyLabel"]
 - !private ["So16NSObjectProtocolP", "croreField"]
 - !private ["So16NSObjectProtocolP", "currentExchangeRates"]
@@ -1546,9 +1495,9 @@ depends-member:
 - ["So16NSObjectProtocolP", ""]
 - !private ["So14NSSecureCodingP", "append"]
 - !private ["So14NSSecureCodingP", "cgRectValue"]
-- !private ["So14NSSecureCodingP", "characters"]
 - !private ["So14NSSecureCodingP", "components"]
 - !private ["So14NSSecureCodingP", "contains"]
+- !private ["So14NSSecureCodingP", "count"]
 - !private ["So14NSSecureCodingP", "index"]
 - ["So14NSSecureCodingP", "init"]
 - !private ["So14NSSecureCodingP", "insert"]
@@ -1557,9 +1506,9 @@ depends-member:
 - !private ["So14NSSecureCodingP", "startIndex"]
 - !private ["So14NSSecureCodingP", "subscript"]
 - !private ["So8NSStringC", "append"]
-- !private ["So8NSStringC", "characters"]
 - !private ["So8NSStringC", "components"]
 - !private ["So8NSStringC", "contains"]
+- !private ["So8NSStringC", "count"]
 - !private ["So8NSStringC", "index"]
 - ["So8NSStringC", "init"]
 - !private ["So8NSStringC", "insert"]
@@ -1579,7 +1528,6 @@ depends-member:
 - !private ["s22RandomAccessCollectionP", "count"]
 - !private ["s22RandomAccessCollectionP", "subscript"]
 - !private ["s26RangeReplaceableCollectionP", "append"]
-- !private ["s26RangeReplaceableCollectionP", "characters"]
 - !private ["s26RangeReplaceableCollectionP", "components"]
 - !private ["s26RangeReplaceableCollectionP", "contains"]
 - !private ["s26RangeReplaceableCollectionP", "count"]
@@ -1597,7 +1545,6 @@ depends-member:
 - !private ["10Foundation20ReferenceConvertibleP", "init"]
 - !private ["10Foundation20ReferenceConvertibleP", "userInfo"]
 - !private ["s8SequenceP", "append"]
-- !private ["s8SequenceP", "characters"]
 - !private ["s8SequenceP", "components"]
 - !private ["s8SequenceP", "contains"]
 - !private ["s8SequenceP", "count"]
@@ -1612,9 +1559,9 @@ depends-member:
 - !private ["s13SignedNumericP", "init"]
 - !private ["s10StrideableP", "init"]
 - !private ["SS", "append"]
-- !private ["SS", "characters"]
 - !private ["SS", "components"]
 - !private ["SS", "contains"]
+- !private ["SS", "count"]
 - !private ["SS", "index"]
 - ["SS", "init"]
 - !private ["SS", "insert"]
@@ -1623,9 +1570,9 @@ depends-member:
 - !private ["SS", "startIndex"]
 - !private ["SS", "subscript"]
 - !private ["s14StringProtocolP", "append"]
-- !private ["s14StringProtocolP", "characters"]
 - !private ["s14StringProtocolP", "components"]
 - !private ["s14StringProtocolP", "contains"]
+- !private ["s14StringProtocolP", "count"]
 - !private ["s14StringProtocolP", "index"]
 - ["s14StringProtocolP", "init"]
 - !private ["s14StringProtocolP", "insert"]
@@ -1634,9 +1581,9 @@ depends-member:
 - !private ["s14StringProtocolP", "startIndex"]
 - !private ["s14StringProtocolP", "subscript"]
 - !private ["s16TextOutputStreamP", "append"]
-- !private ["s16TextOutputStreamP", "characters"]
 - !private ["s16TextOutputStreamP", "components"]
 - !private ["s16TextOutputStreamP", "contains"]
+- !private ["s16TextOutputStreamP", "count"]
 - !private ["s16TextOutputStreamP", "index"]
 - ["s16TextOutputStreamP", "init"]
 - !private ["s16TextOutputStreamP", "insert"]
@@ -1645,9 +1592,9 @@ depends-member:
 - !private ["s16TextOutputStreamP", "startIndex"]
 - !private ["s16TextOutputStreamP", "subscript"]
 - !private ["s20TextOutputStreamableP", "append"]
-- !private ["s20TextOutputStreamableP", "characters"]
 - !private ["s20TextOutputStreamableP", "components"]
 - !private ["s20TextOutputStreamableP", "contains"]
+- !private ["s20TextOutputStreamableP", "count"]
 - !private ["s20TextOutputStreamableP", "index"]
 - ["s20TextOutputStreamableP", "init"]
 - !private ["s20TextOutputStreamableP", "insert"]
@@ -3059,7 +3006,6 @@ depends-member:
 - !private ["s14_ArrayProtocolP", "count"]
 - !private ["s14_ArrayProtocolP", "subscript"]
 - !private ["s23_BidirectionalIndexableP", "append"]
-- !private ["s23_BidirectionalIndexableP", "characters"]
 - !private ["s23_BidirectionalIndexableP", "components"]
 - !private ["s23_BidirectionalIndexableP", "contains"]
 - !private ["s23_BidirectionalIndexableP", "count"]
@@ -3092,9 +3038,9 @@ depends-member:
 - !private ["s24_DestructorSafeContainerP", "subscript"]
 - !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "append"]
-- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "characters"]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "components"]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "contains"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "count"]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "index"]
 - ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "insert"]
@@ -3105,9 +3051,9 @@ depends-member:
 - !private ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "append"]
-- !private ["s34_ExpressibleByBuiltinStringLiteralP", "characters"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "components"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "contains"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "count"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "index"]
 - ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "insert"]
@@ -3117,9 +3063,9 @@ depends-member:
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "subscript"]
 - !private ["s56_ExpressibleByBuiltinUTF16ExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "append"]
-- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "characters"]
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "components"]
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "contains"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "count"]
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "index"]
 - ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "insert"]
@@ -3128,9 +3074,9 @@ depends-member:
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "startIndex"]
 - !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "subscript"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "append"]
-- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "characters"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "components"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "contains"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "count"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "index"]
 - ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "insert"]
@@ -3141,9 +3087,9 @@ depends-member:
 - !private ["s34_ExpressibleByFileReferenceLiteralP", "absoluteString"]
 - !private ["s34_ExpressibleByFileReferenceLiteralP", "init"]
 - !private ["s33_ExpressibleByStringInterpolationP", "append"]
-- !private ["s33_ExpressibleByStringInterpolationP", "characters"]
 - !private ["s33_ExpressibleByStringInterpolationP", "components"]
 - !private ["s33_ExpressibleByStringInterpolationP", "contains"]
+- !private ["s33_ExpressibleByStringInterpolationP", "count"]
 - !private ["s33_ExpressibleByStringInterpolationP", "index"]
 - ["s33_ExpressibleByStringInterpolationP", "init"]
 - !private ["s33_ExpressibleByStringInterpolationP", "insert"]
@@ -3153,9 +3099,9 @@ depends-member:
 - !private ["s33_ExpressibleByStringInterpolationP", "subscript"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "Name"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "append"]
-- !private ["s35_HasCustomAnyHashableRepresentationP", "characters"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "components"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "contains"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "index"]
 - ["s35_HasCustomAnyHashableRepresentationP", "init"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "insert"]
@@ -3164,7 +3110,6 @@ depends-member:
 - !private ["s35_HasCustomAnyHashableRepresentationP", "startIndex"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
 - !private ["s10_IndexableP", "append"]
-- !private ["s10_IndexableP", "characters"]
 - !private ["s10_IndexableP", "components"]
 - !private ["s10_IndexableP", "contains"]
 - !private ["s10_IndexableP", "count"]
@@ -3176,7 +3121,6 @@ depends-member:
 - !private ["s10_IndexableP", "startIndex"]
 - !private ["s10_IndexableP", "subscript"]
 - !private ["s14_IndexableBaseP", "append"]
-- !private ["s14_IndexableBaseP", "characters"]
 - !private ["s14_IndexableBaseP", "components"]
 - !private ["s14_IndexableBaseP", "contains"]
 - !private ["s14_IndexableBaseP", "count"]
@@ -3216,10 +3160,10 @@ depends-member:
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "billionCurrencyLabel"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "billionField"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "cgRectValue"]
-- !private ["10Foundation27_KeyValueCodingAndObservingP", "characters"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "components"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "contains"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "convertToDisplayedFormat"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "count"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "croreCurrencyLabel"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "croreField"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "currentExchangeRates"]
@@ -3320,7 +3264,6 @@ depends-member:
 - !private ["s21_ObjectiveCBridgeableP", "_getBuiltinLogicValue"]
 - !private ["s21_ObjectiveCBridgeableP", "absoluteString"]
 - !private ["s21_ObjectiveCBridgeableP", "append"]
-- !private ["s21_ObjectiveCBridgeableP", "characters"]
 - !private ["s21_ObjectiveCBridgeableP", "components"]
 - !private ["s21_ObjectiveCBridgeableP", "contains"]
 - !private ["s21_ObjectiveCBridgeableP", "count"]
@@ -3337,7 +3280,6 @@ depends-member:
 - !private ["s22_RandomAccessIndexableP", "count"]
 - !private ["s22_RandomAccessIndexableP", "subscript"]
 - !private ["s26_RangeReplaceableIndexableP", "append"]
-- !private ["s26_RangeReplaceableIndexableP", "characters"]
 - !private ["s26_RangeReplaceableIndexableP", "components"]
 - !private ["s26_RangeReplaceableIndexableP", "contains"]
 - !private ["s26_RangeReplaceableIndexableP", "count"]
@@ -3351,7 +3293,6 @@ depends-member:
 - !private ["s11_StrideableP", "init"]
 - !private ["s20_SwiftNewtypeWrapperP", "UIKeyboardWillShow"]
 - !private ["s16_SwiftStringViewP", "append"]
-- !private ["s16_SwiftStringViewP", "characters"]
 - !private ["s16_SwiftStringViewP", "components"]
 - !private ["s16_SwiftStringViewP", "contains"]
 - !private ["s16_SwiftStringViewP", "count"]
@@ -3373,7 +3314,6 @@ depends-nominal:
 - !private "SC6CGRectV"
 - "s7CVarArgP"
 - !private "s9CharacterV"
-- !private "SS13CharacterViewV"
 - "s10CollectionP"
 - "s10ComparableP"
 - "s28CustomDebugStringConvertibleP"
@@ -3523,14 +3463,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/usr/include/objc/ObjectiveC.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/usr/include/Darwin.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
-- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
-interface-hash: "c48f7f9d684d8cccafb4709277f5aae2"
+interface-hash: "39327c9d194fb9bdab3ca4788a56adea"
